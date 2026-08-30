@@ -24,6 +24,15 @@
             {% endfor %} {% endif %} {% endwith %}
         </div>
 
+        <nav>
+            <ul>
+                <li><a href="{{ url_for('home') }} "> Home</a></li>
+                <li><a href=""></a></li>
+                <li><a href=""></a></li>
+                <li><a href=""></a></li>
+            </ul>
+        </nav>
+
         <main class="py-4">{% block content %}{% endblock %}</main>
         {% block scripts %}{% endblock %}
     </body>

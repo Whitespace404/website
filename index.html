@@ -7,59 +7,9 @@
             content="width=device-width, initial-scale=1.0, viewport-fit=cover"
         />
         <title>Rahul Reji</title>
-        <style>
-            @import url("https://fonts.googleapis.com/css2?family=Google+Sans:ital,opsz,wght@0,17..18,400..700;1,17..18,400..700&family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap");
-
-            *,
-            *::before,
-            *::after {
-                box-sizing: border-box;
-            }
-
-            *::selection {
-                background-color: rebeccapurple;
-            }
-
-            * {
-                font-family: "Google Sans", sans-serif;
-            }
-
-            body {
-                margin: 0;
-                min-height: 100vh;
-                min-height: 100dvh;
-                display: flex;
-                flex-direction: column;
-                background-color: #151515;
-                color: white;
-            }
-
-            h1 {
-                margin: auto 0;
-                font-size: clamp(2.5rem, 8vw, 90px);
-                text-align: center;
-                padding: 1rem;
-                line-height: 1.2;
-                color: #c2c2c2;
-            }
-
-            p {
-                position: sticky;
-                bottom: 0;
-                margin: 0;
-                font-size: 18px;
-                color: #c2c2c2;
-                font-family: monospace;
-                text-align: center;
-                line-height: 1.5;
-                padding: 1rem;
-                padding-bottom: max(1rem, env(safe-area-inset-bottom));
-                width: 100%;
-            }
-        </style>
+        <link rel="stylesheet" href="style.css" />
     </head>
     <body>
-        <h1>hi, i'm rahul</h1>
-        <p></p>
+        <h1 class="landing-hero">hi, i'm <span class="name">rahul</span></h1>
     </body>
 </html>

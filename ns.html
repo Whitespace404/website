@@ -1,0 +1,241 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>code</title>
+        <style>
+            pre {
+                overflow-x: auto;
+                white-space: pre;
+                word-wrap: normal;
+                max-width: 100%;
+            }
+
+            pre,
+            code {
+                -moz-tab-size: 2;
+                tab-size: 2;
+            }
+        </style>
+    </head>
+    <body>
+        ==FILENAME exptree.c =========
+        <pre>
+	<code>
+
+#include&lt;stdio.h&gt;
+#include&lt;string.h&gt;
+#include&lt;stdlib.h&gt;
+
+
+struct node{
+		struct node *lc;
+		char w;
+		struct node *rc;
+		};
+
+struct node* create(char exp[40])
+{
+		struct node *stack[strlen(exp)];
+		int top=-1;
+		for(int i=0;i&lt;strlen(exp);i++)
+		{
+			struct node* new=malloc(sizeof(struct node *));
+			new-&gt;w=exp[i];
+			new-&gt;lc=NULL;
+			new-&gt;rc=NULL;
+			if(exp[i]=='+'|| exp[i]=='-' || exp[i]=='*' || exp[i]=='/' || exp[i]=='^')
+			{
+
+				new-&gt;rc=stack[top--];
+				new-&gt;lc=stack[top--];
+				stack[++top]=new;
+			}
+			else
+			{
+				top++;
+				stack[top]=new;
+			}
+		}
+		return stack[top];
+}
+
+
+void traversal(struct node *root)
+{
+		if(root!=NULL)
+			{
+			traversal(root-&gt;lc);
+			printf("%c",root-&gt;w);
+			traversal(root-&gt;rc);
+
+			}
+}
+
+void main()
+{
+int ch;
+struct node* main=NULL;
+puts("enter your choice \n1.enter expression\n2.traversal\n3.stop");
+scanf("%d",&amp;ch);
+while(ch&lt;3)
+{
+		char e[40];
+		if(ch==1)
+		{
+
+			char mean[40];
+			puts("enter the expression");
+			scanf("%s",e);
+			main=create(e);
+		}
+		else
+		{
+			puts("traversal is");
+			traversal(main);
+		}
+		puts("enter your choice");
+		scanf("%d",&amp;ch);
+}
+}
+
+</code>
+</pre>
+
+        <pre>
+<code>
+
+==================FILENAME dict.c=============================
+#include&lt;stdio.h&gt;
+#include&lt;string.h&gt;
+#include&lt;stdlib.h&gt;
+
+
+struct node{
+	struct node *lc;
+	char w[40];
+	char m[40];
+	struct node *rc;
+	};
+
+struct node* insert(struct node *root,char word[40],char meaning[40])
+{
+	if(root==NULL)
+	{
+			struct node* new=(struct node *)malloc(1*sizeof(struct node *));
+			new-&gt;lc=NULL;
+			new-&gt;rc=NULL;
+			strcpy(new-&gt;w,word);
+			strcpy(new-&gt;m,meaning);
+			root=new;
+	}
+	else
+	{
+		int flag=0;
+		struct node* ptr=root;
+		struct node*ptr1;
+		while((ptr!=NULL)&amp;&amp;(flag!=1))
+		{
+			if(strcmp(ptr-&gt;w,word)&gt;0)
+			{
+				ptr1=ptr;
+				ptr=ptr-&gt;lc;
+			}
+			else if(strcmp(ptr-&gt;w,word)&lt;0)
+			{
+				ptr1=ptr;
+				ptr=ptr-&gt;rc;
+			}
+			else
+			{
+				flag=1;
+				printf("the word is already present");
+			}
+		}
+		if(flag==0)
+		{
+			struct node* new=(struct node *)malloc(1*sizeof(struct node *));
+			new-&gt;lc=NULL;
+			new-&gt;rc=NULL;
+			strcpy(new-&gt;w,word);
+			strcpy(new-&gt;m,meaning);
+
+			if(strcmp(ptr1-&gt;w,word)&gt;0)
+			{
+				ptr1-&gt;lc=new;
+			}
+			else if(strcmp(ptr1-&gt;w,word)&lt;0)
+			{
+				ptr1-&gt;rc=new;
+			}
+		}
+	}
+	return root;
+}
+
+
+void search(struct node *root,char word[40])
+{
+	if(root==NULL)
+	{
+		printf("tree empty");
+	}
+	else
+	{
+		int flag=0;
+		struct node* ptr=root;
+		while((ptr!=NULL)&amp;&amp;(flag!=1))
+		{
+			if(strcmp(ptr-&gt;w,word)&gt;0)
+			{
+				ptr=ptr-&gt;lc;
+			}
+			else if(strcmp(ptr-&gt;w,word)&lt;0)
+			{
+				ptr=ptr-&gt;rc;
+			}
+			else
+			{
+				flag=1;
+				printf("the meaning of word %s is %s",ptr-&gt;w,ptr-&gt;m);
+			}
+		}
+		if(flag==0)
+		{
+			printf("the word not found");
+		}
+	}
+}
+
+void main()
+{
+int ch;
+struct node* main=NULL;
+puts("enter your choice \n1.add word\n2.search word\n3.stop");
+scanf("%d",&amp;ch);
+while(ch&lt;3)
+{
+	char wrd[40];
+	if(ch==1)
+	{
+
+		char mean[40];
+		puts("enter the word and meaning to add");
+		scanf("%s %s",wrd,mean);
+		main=insert(main,wrd,mean);
+	}
+	else
+	{
+		puts("enter the word to check");
+		scanf("%s",wrd);
+		search(main,wrd);
+	}
+	puts("enter your choice");
+	scanf("%d",&amp;ch);
+}
+}
+</code>
+</pre>
+    </body>
+</html>
